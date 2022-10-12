@@ -1,0 +1,209 @@
+create table DOCTOR(DSSN varchar(10) primary key,DName varchar(50),Speciality varchar(50),Eyear integer(10));
+ 
+ create table PATIENT(SSN varchar(10)primary key,Name varchar(50),Address varchar(50),Age integer(10));
+ 
+ create table PHCOMPANY(CName varchar(50)primary key,CAddress varchar(50),CNumber Double);
+ 
+ create table DRUG(Tradename varchar(50) primary key,Formula varchar(50),CName varchar(50),foreign key(CName)references PHCOMPANY(CName));
+ 
+ create tale PHARMACY(PName varchar(50)primary key,PAddress varchar(50),PNumber double);
+ 
+ create table TREAT(DSSN varchar(10),SSN varchar(10),foreign key(DSSN)references DOCTOR(DSSN),foreeign key(SSN) references PATIENT(SSN),primary key(DSSN,SSN));
+ 
+ create table CONTRACT(Startdate date,Enddate date,Supervisor varchar(50),Text varchar(100),CName varchar(50),PName varchar(50),foreign key(CName)references PHCOMPANY(CName),foreign key(PName) references PHARMACY(PName),primary key(CName,PName));
+
+create table PRESCRIBE(Prdate date,Quantity integer(15),DSSN varchar(10),SSN varchar(10),Tradename varchar(50),foreign key(DSSN) references DOCTOR(DSSN),foreign key(SSN) references PATIENT(SSN),foreign key(Tradename) references DRUG(Tradename),primary key(DSSN,SSN,Tradename));
+
+ create table SELL(Price double precision,PName varchar(50),Tradename varchar(50),foreign key(PName) references PHARMACY(PName),foreign key(Tradename) references DRUG(Tradename),primary key(PName,Tradename));
+
+
+insert into DOCTOR values('D001','Tabassum','Cardiologist',4);
+insert into DOCTOR values('D002','Zeba','Gynaecologist',3);
+insert into DOCTOR values('D003','Sumitra','Dermatologist',6);
+insert into DOCTOR values('D004','Madiha','Opthalmologist',12);
+insert into DOCTOR values('D005','Junaid','Physician',8);
+insert into DOCTOR values('D006','Umme','Neurologist',5);
+
+
+
+insert into PATIENT values('P001','Mark','Bangalore',25);
+insert into PATIENT values('P002','Alice','Bangalore',20);
+insert into PATIENT values('P003','Jack','Mysore',20);
+insert into PATIENT values('P004','Joe','Hubli',20);
+insert into PATIENT values('P005','Joan','Hubli',24);
+insert into PATIENT values('P006','Jessica','Belgaum',24);
+insert into PATIENT values('P007','Alice','Belgaum',34);
+insert into PATIENT values('P008','David','Hubli',20);
+insert into PATIENT values('P009','Jenny','Mysore',18);
+insert into PATIENT values('P0010','Andrea','Mysore',28);
+insert into PATIENT values('P0011','Rose','Bangalore',29);
+insert into PATIENT values('P0012','Reem','Bangalore',24);
+insert into PATIENT values('P0013','Anny','Bangalore',29);
+insert into PATIENT values('P0014','Joan','Bangalore',19);
+insert into PATIENT values('P0015','Joan','Mysore',35);
+insert into PATIENT values('P0016','Tania','Mysore',25);
+insert into PATIENT values('P0017','Sneha','Hubli',27);
+insert into PATIENT values('P0018','David','Belgaum',23);
+insert into PATIENT values('P0019','Danial','Hubli',39);
+insert into PATIENT values('P0020','Joe','Hubli',33);
+insert into PATIENT values('P0021','Mark','Mysore',23);
+insert into PATIENT values('P0022','Marshal','Mysore',27);
+
+
+
+ insert into PHARMACY values('Akshay Medicals','Bangalore',9876543210);
+ insert into PHARMACY values('Apollo','Bangalore',9876543217);
+ insert into PHARMACY values('Brother Chemists','Bangalore',9876543215);
+ insert into PHARMACY values('HH Medicals','Bangalore',9876543218);
+ insert into PHARMACY values('Janata Pharma','Bangalore',9876543220);
+ insert into PHARMACY values('Janata Pharmacies','Hubli',9876543223);
+ insert into PHARMACY values('Live Life','Bangalore',9876543219);
+ insert into PHARMACY values('Local Store','Belgaum',9876543224);
+ insert into PHARMACY values('Medplus','Bangalore',9876543216);
+ insert into PHARMACY values('Prajna Medicals','Bangalore',9876543212);
+ insert into PHARMACY values('Prasad Medicals','Mysore',9876543223);
+ insert into PHARMACY values('Prasad Pharmacies','Bangalore',9876543213);
+ insert into PHARMACY values('Sanjivani','Bangalore',9876543214);
+ insert into PHARMACY values('SDM Medicals','Hubli',9876543221);
+ insert into PHARMACY values('Sneha Medicals and General Stores','Bangalore',9876543211);
+ insert into PHARMACY values('Vivekananda Medicals','Bangalore',9876543222);
+
+
+
+
+ insert into PHCOMPANY values('Aduacare','Bangalore',9876543224);
+ insert into PHCOMPANY values('Bitcom','Bangalore',8876543224);
+ insert into PHCOMPANY values('Divis','Hyderabad',9877563224);
+ insert into PHCOMPANY values('Dr.Reddy','Hyderabad',9876563224);
+ insert into PHCOMPANY values('Med Pharma','Pune',9877562224);
+ insert into PHCOMPANY values('Sun Pharma','Mumbai',8797563224);
+
+
+
+
+insert into DRUG values('Advipour eye drops','N2H2C12','Aduacare');
+insert into DRUG values('Brustan','Paracetamol','Bitcom');
+insert into DRUG values('Chlorophine','N6H8C18','Dr.Reddy');
+insert into DRUG values('Coldact','N2H4C15','Sun Pharma');
+insert into DRUG values('Dolo Cold','N6H8C16','Divis');
+
+
+
+ insert into CONTRACT values('1998-06-01','2022-08-01','Alice','Contract1','Aduacare','Akshay Medicals');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract1','Bitcom','Akshay Medicals');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract2','Bitcom','Apollo');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract1','Bitcom','Brothers Chemist');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract1','Bitcom','HH Medicals');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract1','Bitcom','Janata Pharma');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract1','Bitcom','Live Life');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract1','Bitcom','Medplus');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract1','Bitcom','Prajna Medicals');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract5','Bitcom','Prasad Pharmacies');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract1','Bitcom','Prasad Medicals');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract1','Bitcom','Sanjivani');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract1','Bitcom','Sneha Medicals and General Stores');
+ insert into CONTRACT values('2000-06-01','2024-08-01','Andrea','Contract1','Bitcom','Vivekananda Medicals');
+ insert into CONTRACT values('2004-08-01','2023-08-01','Alice','Contract4','Sun Pharma','Local Store');
+ insert into CONTRACT values('2004-08-01','2023-08-01','Alice','Contract4','Sun Pharma','SDM Medicals');
+ insert into CONTRACT values('2004-08-01','2023-08-01','Alice','Contract4','Sun Pharma','Vivekananda Medicals');
+
+
+
+
+
+ insert into PRESCRIBE values('2013-07-01',10,'D001','P004','Chlorophine');
+ insert into PRESCRIBE values('2013-01-01',10,'D004','P002','Advipour eye drops');
+ insert into PRESCRIBE values('2013-01-01',10,'D004','P003','Advipour eye drops');
+ insert into PRESCRIBE values('2013-01-01',10,'D004','P008','Advipour eye drops');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P001','Brustan');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P002','Brustan');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P003','Brustan');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P004','Brustan');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P005','Brustan');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P006','Brustan');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P007','Brustan');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P008','Brustan');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P009','Brustan');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P0010','Brustan');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P0011','Brustan');
+ insert into PRESCRIBE values('2013-01-01',10,'D005','P0012','Brustan');
+ insert into PRESCRIBE values('2013-09-07',10,'D005','P0014','Brustan');
+ insert into PRESCRIBE values('2013-09-07',10,'D005','P0015','Brustan');
+ insert into PRESCRIBE values('2013-09-07',10,'D005','P0016','Brustan');
+ insert into PRESCRIBE values('2013-09-07',10,'D005','P0017','Brustan');
+ insert into PRESCRIBE values('2013-09-07',10,'D005','P0018','Brustan');
+ insert into PRESCRIBE values('2013-09-07',10,'D005','P0019','Brustan');
+ insert into PRESCRIBE values('2013-09-07',10,'D005','P0020','Brustan');
+ insert into PRESCRIBE values('2013-09-07',10,'D005','P0021','Brustan');
+ insert into PRESCRIBE values('2013-09-07',10,'D005','P0022','Brustan');
+ 
+
+
+
+insert into SELL values(450,'Akshay Medicals','Dolo Cold');
+insert into SELL values(450,'Apollo','Dolo Cold');
+insert into SELL values(450,'Brothers Chemists','Dolo Cold');
+insert into SELL values(450,'HH Medicals','Dolo Cold');
+insert into SELL values(450,'Janata Pharma','Dolo Cold');
+insert into SELL values(450,'Janata Pharmacies','Dolo Cold');
+insert into SELL values(450,'Live Life','Dolo Cold');
+insert into SELL values(450,'Live Life','Dolo Cold');
+insert into SELL values(450,'Local Store','Dolo Cold');
+insert into SELL values(450,'Medplus','Dolo Cold');
+insert into SELL values(450,'Prajna Medicals','Dolo Cold');
+insert into SELL values(450,'Prasad Pharmacies','Dolo Cold');
+insert into SELL values(450,'Prasad Medicals','Dolo Cold');
+insert into SELL values(450,'Sanjivani','Dolo Cold');
+insert into SELL values(450,'SDM Medicals','Dolo Cold');
+insert into SELL values(450,'Sneha Medicals and General Stores','Dolo Cold');
+insert into SELL values(450,'Vivekananda Medicals','Dolo Cold');
+
+
+
+insert into TREAT values('D001','P001');
+insert into TREAT values('D005','P001');
+insert into TREAT values('D001','P002');
+insert into TREAT values('D004','P002');
+insert into TREAT values('D005','P002');
+insert into TREAT values('D004','P003');
+insert into TREAT values('D005','P003');
+insert into TREAT values('D005','P004');
+insert into TREAT values('D005','P005');
+insert into TREAT values('D005','P006');
+insert into TREAT values('D001','P007');
+insert into TREAT values('D005','P007');
+insert into TREAT values('D004','P008');
+insert into TREAT values('D005','P008');
+insert into TREAT values('D005','P009');
+insert into TREAT values('D005','P0010');
+insert into TREAT values('D005','P0011');
+insert into TREAT values('D005','P0012');
+
+
+
+QUERY 1
+select D.*,P.* from DOCTOR D,PATIENT P,TREAT T where T.DSSN=D.DSSN and T.SSN=P.SSN and P.Age=2
+0 and D.Speciality='Opthalmologist';
+OR
+select * from PATIENT where Age=20 and SSN in(select SSN from TREAT where DSSN in(select DSSN from DOCTOR where Speciality='Opthalmologist'));
+
+
+QUERY 2
+select D.*,count(P.SSN) from DOCTOR D,PRESCRIBE P where P.DSSN=D.DSSN and P.Prdate like "2013%" group by P.DSSN having count(P.SSN)>20;
+
+
+QUERY 3
+select * from DOCTOR where Eyear in(select max(Eyear) from DOCTOR);
+
+
+QUERY 4
+ select PC.* from PHCOMPANY PC,CONTRACT C,PHARMACY P where C.CName=PC.CName and C.PName=P.PName and PC.CAddress=P.PAddress group by C.CName having count(C.CName)>=10;
+
+
+QUERY 5
+select D.* from DRUG D,PHCOMPANY P where P.CName=D.CName group by(D.Tradename) having count(D.CName)=1;
+
+
+QUERY 6
+select D.* from DRUG D,PHARMACY P,SELL S where S.PName=P.PName and S.Tradename=D.Tradename group by(S.Tradename) having count(S.PName)=(select count(P.PName) from PHARMACY P);
+
